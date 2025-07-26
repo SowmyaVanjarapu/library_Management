@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Library Management System</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Create an Account</h2>
+      <p>Sign up to access the Library Management System</p>
+      <form id="signup-form">
+        <label for="new-username">Username:</label>
+        <input type="text" id="new-username" placeholder="Enter your username" required>
+
+        <label for="new-password">Password:</label>
+        <input type="password" id="new-password" placeholder="Enter your password" required>
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+
+        <a href="home1.html"><button type="submit">Sign Up</button></a>
+        <p id="signup-error" class="error-message"></p>
+      </form>
+      <p class="signup-link">Already have an account? <a href="login.html">Login here</a>.</p>
+    </div>
+  </div>
+
+  <script src="js/signup.js"></script>
+</body>
+</html>

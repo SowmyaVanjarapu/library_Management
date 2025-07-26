@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Borrow Books | Library Management System</title>
+  <link rel="stylesheet" href="css/borrow.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <h1>LibraryHub</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="author.html">Authors</a></li>
+        <li><a href="borrow.html" class="active">Borrow</a></li>
+        <li><a href="mybooks.html">My Books</a></li> 
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Borrow Section -->
+  <section class="borrow-section">
+    <div class="borrow-form-container">
+      <h2>Borrow a Book</h2>
+      <form id="borrow-form" class="borrow-form">
+        <div class="form-group">
+          <label for="name">Enter Username:</label>
+          <input type="text" id="name" name="name" class="form-input" required placeholder="Enter your username" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Your Email:</label>
+          <input type="email" id="email" name="email" class="form-input" required placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+          <label for="book-title">Book Title:</label>
+          <input type="text" id="book-title" name="book-title" class="form-input" required placeholder="Enter the book title" />
+        </div>
+
+        <div class="form-group">
+          <label for="borrow-date">Borrow Date:</label>
+          <input type="date" id="borrow-date" name="borrow-date" class="form-input" required />
+        </div>
+
+        <div class="form-group">
+          <label for="return-date">Return Date:</label>
+          <input type="date" id="return-date" name="return-date" class="form-input" required />
+        </div>
+
+        <button type="submit" class="form-btn">Submit Request</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2023 LibraryHub | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById('borrow-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        bookTitle: document.getElementById('book-title').value,
+        borrowDate: document.getElementById('borrow-date').value,
+        returnDate: document.getElementById('return-date').value,
+      };
+
+      // Send borrow request to backend
+      fetch('http://localhost:3000/borrow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Send reminder email
+          fetch('http://localhost:3000/send-reminder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: formData.email,
+              username: formData.name,
+              bookTitle: formData.bookTitle,
+              returnDate: formData.returnDate,
+            }),
+          });
+
+          alert(`Your request has been submitted.\nReturn Due Date: ${formData.returnDate}\nYou will receive a reminder before the due date.`);
+          document.getElementById('borrow-form').reset();
+        } else {
+          alert("Failed to submit the request: " + data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("An error occurred. Please try again.");
+      });
+    });
+  </script>
+
+</body>
+</html>

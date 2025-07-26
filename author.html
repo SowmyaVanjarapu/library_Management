@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | Authors & Books Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+            text-align: center;
+            scroll-behavior: smooth;
+        }
+        .header-container {
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .author-card, .book-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+        }
+        .author-list, .book-list {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 10px;
+        }
+        h2 {
+            cursor: pointer;
+            color: #004080;
+        }
+        nav {
+        margin-top: 15px;
+    }
+
+    .nav-list {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-list li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 18px;
+        padding: 6px 12px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-list li a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    </style>
+</head>
+<body>
+
+    <header class="header-container">
+        <h1>Library | Themed Book Collection</h1>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="borrow.html">Borrow</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+    </header>
+
+    <section>
+        <h2 onclick="scrollToSection('motivational-books')">Motivational Books</h2>
+        <div class="book-list" id="motivational-books-container"></div>
+    </section>
+
+    <section>
+        <h2 onclick="scrollToSection('fictional-books')">Fictional Books</h2>
+        <div class="book-list" id="fictional-books-container"></div>
+    </section>
+
+    <section>
+        <h2 onclick="scrollToSection('history-books')">History Books</h2>
+        <div class="book-list" id="history-books-container"></div>
+    </section>
+
+    <section>
+        <h2 onclick="scrollToSection('inspirational-books')">Inspirational Books</h2>
+        <div class="book-list" id="inspirational-books-container"></div>
+    </section>
+
+    <section>
+        <h2 onclick="scrollToSection('other-books')">Other Influential Books</h2>
+        <div class="book-list" id="other-books-container"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Library System | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+        }
+
+        const motivationalBooks = [
+            { title: "Think and Grow Rich", author: "Napoleon Hill", location: "Shelf M1" },
+            { title: "How to Win Friends and Influence People", author: "Dale Carnegie", location: "Shelf M2" },
+            { title: "Awaken the Giant Within", author: "Tony Robbins", location: "Shelf M3" },
+            { title: "Atomic Habits", author: "James Clear", location: "Shelf M4" },
+            { title: "The 7 Habits of Highly Effective People", author: "Stephen R. Covey", location: "Shelf M5" }
+        ];
+
+        const fictionalBooks = [
+            { title: "Harry Potter Series", author: "J.K. Rowling", location: "Shelf F1" },
+            { title: "The Lord of the Rings", author: "J.R.R. Tolkien", location: "Shelf F2" },
+            { title: "A Song of Ice and Fire", author: "George R.R. Martin", location: "Shelf F3" },
+            { title: "Sherlock Holmes", author: "Arthur Conan Doyle", location: "Shelf F4" },
+            { title: "The Hunger Games", author: "Suzanne Collins", location: "Shelf F5" }
+        ];
+
+        const historyBooks = [
+            { title: "Sapiens: A Brief History of Humankind", author: "Yuval Noah Harari", location: "Shelf H1" },
+            { title: "Guns, Germs, and Steel", author: "Jared Diamond", location: "Shelf H2" },
+            { title: "A People's History of the United States", author: "Howard Zinn", location: "Shelf H3" },
+            { title: "The Silk Roads", author: "Peter Frankopan", location: "Shelf H4" },
+            { title: "The Wright Brothers", author: "David McCullough", location: "Shelf H5" }
+        ];
+
+        const inspirationalBooks = [
+            { title: "The Power of Now", author: "Eckhart Tolle", location: "Shelf I1" },
+            { title: "Daring Greatly", author: "Brené Brown", location: "Shelf I2" },
+            { title: "The Greatest Salesman in the World", author: "Og Mandino", location: "Shelf I3" },
+            { title: "The Monk Who Sold His Ferrari", author: "Robin Sharma", location: "Shelf I4" },
+            { title: "The Secret", author: "Rhonda Byrne", location: "Shelf I5" }
+        ];
+
+        const otherBooks = [
+            { title: "The 48 Laws of Power", author: "Robert Greene", location: "Shelf O1" },
+            { title: "Outliers", author: "Malcolm Gladwell", location: "Shelf O2" },
+            { title: "Thinking, Fast and Slow", author: "Daniel Kahneman", location: "Shelf O3" },
+            { title: "The Selfish Gene", author: "Richard Dawkins", location: "Shelf O4" },
+            { title: "Physics of the Future", author: "Michio Kaku", location: "Shelf O5" }
+        ];
+
+        function loadBooks(category, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            category.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.classList.add('book-card');
+                bookCard.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Location:</strong> ${book.location}</p>
+                `;
+                container.appendChild(bookCard);
+            });
+        }
+
+        window.onload = () => {
+            loadBooks(motivationalBooks, 'motivational-books-container');
+            loadBooks(fictionalBooks, 'fictional-books-container');
+            loadBooks(historyBooks, 'history-books-container');
+            loadBooks(inspirationalBooks, 'inspirational-books-container');
+            loadBooks(otherBooks, 'other-books-container');
+        };
+    </script>
+
+</body>
+</html>

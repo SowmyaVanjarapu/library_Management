@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books | Library Management System</title>
+  <link rel="stylesheet" href="css/books.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Style for the 'No books found' message */
+    #no-books-message {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e74c3c;
+      text-align: center;
+      margin-top: 20px;
+      display: none; /* Initially hidden */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <h1>LibraryHub</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="books.html" class="active">Books</a></li>
+        <li><a href="author.html">Authors</a></li>
+        <li><a href="borrow.html">Borrow</a></li>
+        <li><a href="mybooks.html">My Books</a></li> 
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Book Search Section -->
+  <section class="search-section">
+    <h2>Search for Books</h2>
+    <input type="text" id="bookSearch" class="search-input" placeholder="Search by title...">
+    <button onclick="searchBook()" class="search-btn">Search</button>
+  </section>
+
+  <!-- Books Section -->
+  <section class="books-section">
+    <h2 class="section-title">All Books</h2>
+    <div id="books-container" class="books-container">
+      <!-- Book cards will be added here dynamically -->
+    </div>
+    <!-- 'No books found' message -->
+    <div id="no-books-message">No books found.</div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2023 LibraryHub | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Fetch all books when "Books" page loads
+    function fetchAllBooks() {
+      fetch('http://localhost:3000/books')  // Fetch from your /books endpoint
+        .then(response => response.json())
+        .then(data => {
+          if (!data || data.length === 0) {
+            document.getElementById('no-books-message').style.display = 'block';
+            document.getElementById('books-container').innerHTML = '';
+          } else {
+            document.getElementById('no-books-message').style.display = 'none';
+            displayBooks(data); // Display the books
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching books:', error);
+          alert('An error occurred while fetching books.');
+        });
+    }
+
+    // Search for books by title
+    function searchBook() {
+      const searchQuery = document.getElementById("bookSearch").value.trim().toLowerCase();
+
+      // API endpoint based on search query
+      const apiEndpoint = searchQuery 
+        ? `http://localhost:3000/search?title=${searchQuery}` 
+        : `http://localhost:3000/books`; // If no search, fetch all books
+
+      // Fetch data from the server
+      fetch(apiEndpoint)
+        .then(response => response.json())
+        .then(data => {
+          if (!data || data.length === 0) {
+            document.getElementById('no-books-message').style.display = 'block';
+            document.getElementById('books-container').innerHTML = '';
+          } else {
+            document.getElementById('no-books-message').style.display = 'none';
+            displayBooks(data); // Display the books
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching books:', error);
+          alert('An error occurred while fetching books.');
+        });
+    }
+
+    // Display books in the books container
+    function displayBooks(books) {
+      const container = document.getElementById('books-container');
+      container.innerHTML = ''; // Clear existing content
+      document.getElementById('no-books-message').style.display = 'none'; // Hide "No books found" message
+
+      books.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
+        bookCard.innerHTML = `
+          <div class="book-info">
+            <h3>${book.title}</h3>
+            <p><strong>Author:</strong> ${book.author}</p>
+            <p><strong>Genre:</strong> ${book.genre}</p>
+            <p><strong>Publication Year:</strong> ${book.publication_year}</p>
+          </div>
+        `;
+        container.appendChild(bookCard);
+      });
+    }
+
+    // Call fetchAllBooks on page load
+    window.onload = fetchAllBooks;
+  </script>
+
+</body>
+</html>

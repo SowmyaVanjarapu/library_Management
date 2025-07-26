@@ -1,0 +1,124 @@
+/* General Reset and Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #333;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+header nav ul {
+  display: flex;
+  gap: 20px;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+header nav a:hover, header nav .active {
+  color: #ff6f61;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 50px 20px;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.contact-info-container h2 {
+  font-size: 2.2rem; /* Increased title font size */
+  margin-bottom: 20px;
+}
+
+.contact-info-container h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.contact-details p {
+  margin-bottom: 18px;
+  font-size: 1.2rem; /* Slightly larger font size for details */
+  color: #333;
+}
+
+.contact-details p i {
+  margin-right: 10px;
+  color: #2575fc;
+}
+
+/* Map Section */
+.map-container {
+  width: 50%; /* Slightly larger map width */
+  padding: 30px;
+  background-color: #f4f7fb;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.map-responsive {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+  height: 0;
+}
+
+.map-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+footer p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+

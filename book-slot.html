@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Slot | LibraryHub</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fb;
+    }
+
+    header {
+      background-color: #2c3e50;
+      padding: 1rem 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    main {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #1f5f8a;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #2c3e50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>LibraryHub - Book a Slot</h1>
+  </header>
+
+  <main>
+    <h2 id="booking-title">Book Slot</h2>
+    <form id="slot-form">
+      <div class="form-group">
+        <label for="username">Your Name:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter your name" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email" />
+      </div>
+
+      <div class="form-group">
+        <label for="date">Booking Date:</label>
+        <input type="date" id="date" name="date" required />
+      </div>
+
+      <div class="form-group">
+        <label for="time">Time Slot:</label>
+        <select id="time" name="time" required>
+          <option value="">Select a time slot</option>
+          <option>9:00 AM - 10:00 AM</option>
+          <option>10:00 AM - 11:00 AM</option>
+          <option>11:00 AM - 12:00 PM</option>
+          <option>1:00 PM - 2:00 PM</option>
+          <option>2:00 PM - 3:00 PM</option>
+          <option>3:00 PM - 4:00 PM</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn">Confirm Booking</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 LibraryHub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Get name from query string
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name') || 'Resource';
+
+    document.getElementById('booking-title').textContent = `Book Slot for "${name}"`;
+
+    // Handle form submission
+    document.getElementById('slot-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      alert(`Booking confirmed for "${name}" on ${document.getElementById('date').value} at ${document.getElementById('time').value}.`);
+
+      // Optionally send data to backend here
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

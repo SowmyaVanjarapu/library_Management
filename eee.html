@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEE Branch | Library Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+       body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+    text-align: center;
+    background-image: url('images/eee1.jpg');
+    background-size: cover;       /* Makes the image cover the entire background */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+        .department-container {
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .department-image {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        .courses-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+        .courses-list li {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .courses-list li:hover {
+            background: #2980b9;
+        }
+        .book-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px auto;
+            width: 300px;
+            text-align: center;
+        }
+        .borrow-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .borrow-btn:hover {
+            background-color: #27ae60;
+        }
+        #no-books-message {
+      font-size: 1.5rem;
+      color: #e74c3c;
+      text-align: center;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .courses-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 20px auto;
+      padding: 0;
+      list-style: none;
+    }
+
+    .courses-list li {
+      background: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .courses-list li:hover {
+      background: #2980b9;
+    }
+
+    .borrow-btn {
+      margin-top: 10px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .borrow-btn:hover {
+      background-color: #27ae60;
+    }
+    /* General Reset and Layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Body */
+  body {
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: #333;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  header .logo h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  header nav ul {
+    display: flex;
+    gap: 20px;
+  }
+ 
+  header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  
+  header nav a:hover, header nav .active {
+    color: #ff6f61;
+  }
+  
+  /* Search Section */
+  .search-section {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .search-section h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    padding: 12px 20px;
+    width: 250px;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    margin-right: 10px;
+  }
+  
+  .search-btn {
+    padding: 12px 20px;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-btn:hover {
+    background-color: #1c5ab1;
+  }
+  
+  /* Books Section */
+  .books-section {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .books-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .book-card {
+    background-color: #f4f7fb;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .book-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .book-info p {
+    font-size: 1.1rem;
+    color: #777;
+  }
+  
+  footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    header nav ul {
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+  
+    .books-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .book-card {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  
+  
+  </style>
+    </style>
+</head>
+<body>
+
+    <header class="department-container">
+        <img src="eee-image.jpg" alt="EEE Department" class="department-image">
+        <p>EEE Department Library</p>
+    </header>
+
+    <section>
+        <h2>Select a Course</h2>
+        <ul class="courses-list">
+            <li onclick="loadBooks('Power Systems')">Power Systems</li>
+            <li onclick="loadBooks('Electrical Machines')">Electrical Machines</li>
+            <li onclick="loadBooks('Control Systems')">Control Systems</li>
+            <li onclick="loadBooks('Microprocessors')">Microprocessors</li>
+            <li onclick="loadBooks('Power Electronics')">Power Electronics</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Books for Selected Course</h2>
+        <div id="books-container"></div>
+        <div id="no-books-message" style="display:none;">No books found.</div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 EEE Library Management System | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        const books = {
+            "Power Systems": [
+                { title: "Power System Analysis", author: "Hadi Saadat", location: "Rack A2, Section 1" },
+                { title: "Electric Power Systems", author: "Alexis Kwasinski", location: "Rack A2, Section 1" },
+                { title: "Power System Stability and Control", author: "P. Kundur", location: "Rack A3, Section 1" },
+                { title: "Fundamentals of Power System Protection", author: "Y.G. Paithankar", location: "Rack A3, Section 1" },
+                { title: "Renewable and Efficient Electric Power Systems", author: "Gilbert Masters", location: "Rack A3, Section 1" }
+            ],
+            "Electrical Machines": [
+                { title: "Electrical Machine Design", author: "A.K. Sawhney", location: "Rack B1, Section 2" },
+                { title: "Electric Machinery Fundamentals", author: "Stephen Chapman", location: "Rack B1, Section 2" },
+                { title: "Principles of Electric Machines and Power Electronics", author: "P.C. Sen", location: "Rack B2, Section 2" },
+                { title: "Electrical Machines & Drives", author: "John Hindmarsh", location: "Rack B2, Section 2" },
+                { title: "Fundamentals of Electrical Drives", author: "G.K. Dubey", location: "Rack B2, Section 2" }
+            ],
+            "Control Systems": [
+                { title: "Modern Control Engineering", author: "Katsuhiko Ogata", location: "Rack C3, Section 3" },
+                { title: "Control Systems Engineering", author: "Norman Nise", location: "Rack C3, Section 3" },
+                { title: "Automatic Control Systems", author: "Benjamin Kuo", location: "Rack C4, Section 3" },
+                { title: "Feedback Control of Dynamic Systems", author: "Gene Franklin", location: "Rack C4, Section 3" },
+                { title: "Linear Control System Analysis and Design", author: "J.J. D'Azzo", location: "Rack C4, Section 3" }
+            ],
+            "Microprocessors": [
+                { title: "Microprocessor Architecture, Programming, and Applications", author: "Ramesh Gaonkar", location: "Rack D1, Section 4" },
+                { title: "The Intel Microprocessors", author: "Barry B. Brey", location: "Rack D1, Section 4" },
+                { title: "Fundamentals of Microprocessors", author: "Douglas V. Hall", location: "Rack D1, Section 4" },
+                { title: "Advanced Microprocessors and Peripherals", author: "K.M. Bhurchandi", location: "Rack D2, Section 4" },
+                { title: "Microprocessor Systems Design", author: "James L. Antonakos", location: "Rack D2, Section 4" }
+            ],
+            "Power Electronics": [
+                { title: "Power Electronics", author: "Muhammad H. Rashid", location: "Rack E1, Section 5" },
+                { title: "Modern Power Electronics", author: "B.K. Bose", location: "Rack E1, Section 5" },
+                { title: "Principles of Power Electronics", author: "John G. Kassakian", location: "Rack E2, Section 5" },
+                { title: "Power Electronics Handbook", author: "Franki S. Chau", location: "Rack E2, Section 5" },
+                { title: "Power Semiconductor Drives", author: "Gopal K. Dubey", location: "Rack E2, Section 5" }
+            ]
+        };
+
+        function loadBooks(course) {
+            const container = document.getElementById('books-container');
+            container.innerHTML = '';
+            if (!books[course]) {
+                document.getElementById('no-books-message').style.display = 'block';
+                return;
+            }
+            document.getElementById('no-books-message').style.display = 'none';
+            books[course].forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.classList.add('book-card');
+                bookCard.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Location:</strong> ${book.location}</p>
+                    <a href="borrow.html"><button class="borrow-btn">Borrow</button></a>
+                `;
+                container.appendChild(bookCard);
+            });
+        }
+    </script>
+
+</body>
+</html>

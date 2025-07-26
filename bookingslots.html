@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library Rooms & Resources</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fb;
+    }
+
+    header {
+      background-color: #2c3e50;
+      padding: 1rem 2rem;
+      color: white;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-list li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-list li a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .card {
+      padding: 1.5rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .available-room {
+      background-color: #f8fff8;
+    }
+
+    .occupied-room {
+      background-color: #ffecec;
+    }
+
+    .available-resource {
+      background-color: #f5faff;
+    }
+
+    h3 {
+      margin: 0 0 0.5rem;
+      color: #2c3e50;
+    }
+
+    p {
+      margin: 0.25rem 0;
+      color: #666;
+    }
+
+    .status {
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    .available {
+      color: #27ae60;
+    }
+
+    .occupied {
+      color: #e74c3c;
+    }
+
+    .resource-available {
+      color: #2980b9;
+    }
+
+    .book-btn {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .book-btn:hover {
+      background-color: #1f5f8a;
+    }
+
+    .book-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <h1>Library Management</h1>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="borrow.html">Borrow</a></li>
+        <li><a href="author.html">Author</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section>
+      <h2>Available Rooms</h2>
+      <div id="rooms" class="grid"></div>
+    </section>
+
+    <section style="margin-top: 3rem;">
+      <h2>Digital Resources</h2>
+      <div id="resources" class="grid"></div>
+    </section>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    const rooms = [
+      { id: 1, name: 'Study Room A', capacity: 4, available: true },
+      { id: 2, name: 'Conference Room', capacity: 8, available: false },
+      { id: 3, name: 'Quiet Zone', capacity: 6, available: true },
+      { id: 4, name: 'Media Room', capacity: 5, available: true },
+      { id: 5, name: 'Group Study Room B', capacity: 6, available: true }
+    ];
+
+    const digitalResources = [
+      { id: 1, name: 'Computer Station 1', type: 'Computer', available: true },
+      { id: 2, name: 'Computer Station 2', type: 'Computer', available: false },
+      { id: 3, name: '3D Printer', type: 'Printer', available: true },
+      { id: 4, name: 'High-Performance PC', type: 'Computer', available: true },
+      { id: 5, name: 'Color Printer', type: 'Printer', available: false }
+    ];
+
+    const roomsContainer = document.getElementById('rooms');
+    const resourcesContainer = document.getElementById('resources');
+
+    rooms.forEach(room => {
+      const div = document.createElement('div');
+      div.className = `card ${room.available ? 'available-room' : 'occupied-room'}`;
+      div.innerHTML = `
+        <h3>${room.name}</h3>
+        <p>Capacity: ${room.capacity} people</p>
+        <p class="status ${room.available ? 'available' : 'occupied'}">
+          ${room.available ? 'Available Now' : 'Currently Occupied'}
+        </p>
+        <a href="book-slot.html?name=${encodeURIComponent(room.name)}" class="book-btn" ${!room.available ? 'style="pointer-events:none;opacity:0.6;"' : ''}>
+          ${room.available ? 'Book Slot' : 'Unavailable'}
+        </a>
+      `;
+      roomsContainer.appendChild(div);
+    });
+
+    digitalResources.forEach(resource => {
+      const div = document.createElement('div');
+      div.className = `card ${resource.available ? 'available-resource' : 'occupied-room'}`;
+      div.innerHTML = `
+        <h3>${resource.name}</h3>
+        <p>Type: ${resource.type}</p>
+        <p class="status ${resource.available ? 'resource-available' : 'occupied'}">
+          ${resource.available ? 'Available for Use' : 'Currently in Use'}
+        </p>
+        <a href="book-slot.html?name=${encodeURIComponent(resource.name)}" class="book-btn" ${!resource.available ? 'style="pointer-events:none;opacity:0.6;"' : ''}>
+          ${resource.available ? 'Book Slot' : 'Unavailable'}
+        </a>
+      `;
+      resourcesContainer.appendChild(div);
+    });
+  </script>
+
+</body>
+</html>

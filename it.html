@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Branch | Library Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fb;
+    text-align: center;
+    background-image: url('images/it.jpg');
+    background-size: cover;       /* Makes the image cover the entire background */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+
+
+        .department-container {
+            padding: 20px;
+            background-color: #004080;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .department-image {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        .courses-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+        .courses-list li {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .courses-list li:hover {
+            background: #2980b9;
+        }
+        #books-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .book-card {
+            width: calc(50% - 20px);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .borrow-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .borrow-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="department-container">
+        
+        <p>IT Department Library</p>
+    </header>
+
+    <section>
+        <h2>Select a Course</h2>
+        <ul class="courses-list">
+            <li onclick="loadBooks('Computer Networks')">Computer Networks</li>
+            <li onclick="loadBooks('Cyber Security')">Cyber Security</li>
+            <li onclick="loadBooks('Cloud Computing')">Cloud Computing</li>
+            <li onclick="loadBooks('Software Engineering')">Software Engineering</li>
+            <li onclick="loadBooks('Web Development')">Web Development</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Books for Selected Course</h2>
+        <div id="books-container"></div>
+        <div id="no-books-message" style="display:none;">No books found.</div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 IT Library Management System | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        const books = {
+            "Computer Networks": [
+                { title: "Computer Networking: A Top-Down Approach", author: "James F. Kurose", location: "Rack A1, Section 1" },
+                { title: "Data Communications and Networking", author: "Behrouz A. Forouzan", location: "Rack A1, Section 1" },
+                { title: "Networking All-in-One For Dummies", author: "Doug Lowe", location: "Rack A2, Section 1" },
+                { title: "Network Security Essentials", author: "William Stallings", location: "Rack A2, Section 1" },
+                { title: "Routing and Switching Essentials", author: "Cisco Networking Academy", location: "Rack A2, Section 1" }
+            ],
+            "Cyber Security": [
+                { title: "Cybersecurity Essentials", author: "Charles J. Brooks", location: "Rack B1, Section 2" },
+                { title: "Hacking: The Art of Exploitation", author: "Jon Erickson", location: "Rack B1, Section 2" },
+                { title: "The Web Application Hacker’s Handbook", author: "Dafydd Stuttard", location: "Rack B2, Section 2" },
+                { title: "Cybersecurity and Cyberwar", author: "P.W. Singer", location: "Rack B2, Section 2" },
+                { title: "Hands-on Ethical Hacking and Network Defense", author: "Michael T. Simpson", location: "Rack B2, Section 2" }
+            ],
+            "Cloud Computing": [
+                { title: "Cloud Computing: Principles and Paradigms", author: "Rajkumar Buyya", location: "Rack C1, Section 3" },
+                { title: "Cloud Computing for Dummies", author: "Judith Hurwitz", location: "Rack C1, Section 3" },
+                { title: "Architecting the Cloud", author: "Michael J. Kavis", location: "Rack C2, Section 3" },
+                { title: "Amazon Web Services in Action", author: "Michael Wittig", location: "Rack C2, Section 3" },
+                { title: "Cloud Computing: Theory and Practice", author: "Dan Marinescu", location: "Rack C2, Section 3" }
+            ],
+            "Software Engineering": [
+                { title: "Software Engineering: A Practitioner's Approach", author: "Roger S. Pressman", location: "Rack D1, Section 4" },
+                { title: "Clean Code: A Handbook of Agile Software Craftsmanship", author: "Robert C. Martin", location: "Rack D1, Section 4" },
+                { title: "The Pragmatic Programmer", author: "Andrew Hunt", location: "Rack D2, Section 4" },
+                { title: "Refactoring: Improving the Design of Existing Code", author: "Martin Fowler", location: "Rack D2, Section 4" },
+                { title: "Software Testing and Debugging", author: "Paul C. Jorgensen", location: "Rack D2, Section 4" }
+            ],
+            "Web Development": [
+                { title: "HTML and CSS: Design and Build Websites", author: "Jon Duckett", location: "Rack E1, Section 5" },
+                { title: "JavaScript and JQuery: Interactive Front-End Web Development", author: "Jon Duckett", location: "Rack E1, Section 5" },
+                { title: "Eloquent JavaScript", author: "Marijn Haverbeke", location: "Rack E2, Section 5" },
+                { title: "Learning PHP, MySQL & JavaScript", author: "Robin Nixon", location: "Rack E2, Section 5" },
+                { title: "Web Design with HTML, CSS, JavaScript", author: "Jon Duckett", location: "Rack E2, Section 5" }
+            ]
+        };
+
+        function loadBooks(course) {
+            const container = document.getElementById('books-container');
+            container.innerHTML = '';
+            books[course].forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.classList.add('book-card');
+                bookCard.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Location:</strong> ${book.location}</p>
+                 <a href="borrow.html"><button class="borrow-btn">Borrow</button></a>
+                `;
+                container.appendChild(bookCard);
+            });
+        }
+    </script>
+
+</body>
+</html>

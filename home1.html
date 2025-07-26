@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Modern Library Management System</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 0;
+      list-style: none;
+    }
+    .dropdown-menu.show {
+      display: block;
+    }
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #333;
+    }
+    .dropdown-menu li a:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <h1>Library Management</h1>
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="author.html">Authors</a></li>
+        <li><a href="borrow.html">Borrow</a></li>
+        <li><a href="bookingslots.html">bookingslots</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        
+        <li class="dropdown">
+          <a href="#" onclick="toggleDropdown(event)">Branches</a>
+          <ul class="dropdown-menu" id="branchesDropdown">
+            <li><a href="cse.html" onclick="filterBranch('CSE')">CSE</a></li>
+            <li><a href="it.html" onclick="filterBranch('IT')">IT</a></li>
+            <li><a href="eee.html" onclick="filterBranch('EEE')">EEE</a></li>
+            <li><a href="ece.html" onclick="filterBranch('ECE')">ECE</a></li>
+          </ul>
+        </li>
+       
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Explore Our Digital Library</h2>
+      <p>Access thousands of books with just a click. Your next read is waiting.</p>
+      
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature">
+      <h3>Search Books</h3>
+      <p>Discover books by genre, author, or title.</p>
+    </div>
+    <div class="feature">
+      <h3>Borrow Books</h3>
+      <p>Easily borrow books by signing up with your account.</p>
+    </div>
+    <div class="feature">
+      <h3>Meet Authors</h3>
+      <p>Get to know the brilliant minds behind your favorite books.</p>
+      <button onclick="window.location.href='author.html'">Explore Authors</button>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial">
+      <p>"A seamless experience. The system is intuitive and easy to use!"</p>
+      <cite>- Sarah</cite>
+    </div>
+    <div class="testimonial">
+      <p>"I love how easy it is to find and borrow books."</p>
+      <cite>- John</cite>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <h2>Ready to Dive In?</h2>
+    <p>Join our library today and access a world of knowledge.</p>
+    <div class="auth-buttons">
+      <button class="auth-button sign-out-button" onclick="signOut()">Sign Out</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2023 Library Management System | All Rights Reserved</p>
+    <p>Contact Us: info@library.com | Opening Hours: 8 AM - 9 PM</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function filterBranch(branch) {
+      fetch(`http://localhost:3000/books?branch=${branch}`)
+        .then(res => res.json())
+        .then(books => {
+          localStorage.setItem('filteredBooks', JSON.stringify(books));
+        })
+        .catch(err => alert('Failed to load books: ' + err));
+    }
+
+    function toggleDropdown(event) {
+      event.preventDefault();
+      const menu = document.getElementById('branchesDropdown');
+      menu.classList.toggle('show');
+    }
+
+    function signOut() {
+      alert('You have been signed out.');
+    }
+
+    // Optional: Close dropdown when clicking outside
+    window.addEventListener('click', function (e) {
+      if (!e.target.closest('.dropdown')) {
+        document.getElementById('branchesDropdown')?.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+</html>

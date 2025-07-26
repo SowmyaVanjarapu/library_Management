@@ -1,0 +1,424 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Body */
+body {
+  background-color: #f4f7fb;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #333;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+header nav ul {
+  display: flex;
+  gap: 30px;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+header nav a:hover {
+  color: #ff6f61;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1485322551133-3a4c27a9d925?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGxpYnJhcnl8ZW58MHx8MHx8fDA%3D'); /* Replace with your background image */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 0 20px;
+}
+
+.hero-content {
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 12px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero h2 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.hero button {
+  padding: 15px 30px;
+  background-color: #ff6f61;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero button:hover {
+  background-color: #e55d50;
+}
+
+/* Features Section */
+.features {
+  display: flex;
+  justify-content: space-around;
+  margin: 50px 0;
+  padding: 20px;
+}
+
+.feature {
+  text-align: center;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature img {
+  max-width: 80px;
+  margin-bottom: 20px;
+}
+
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feature h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.feature p {
+  font-size: 1.1rem;
+  color: #777;
+}
+
+.feature button {
+  padding: 10px 20px;
+  margin-top: 15px;
+  background-color: #2575fc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feature button:hover {
+  background-color: #046cff;
+}
+
+/* Testimonials Section */
+.testimonials {
+  background-color: #333;
+  color: white;
+  padding: 50px;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.testimonial {
+  margin-bottom: 30px;
+  font-style: italic;
+  color: #d1d1d1;
+}
+
+.testimonial cite {
+  font-size: 1.1rem;
+  color: #bbb;
+  display: block;
+  margin-top: 10px;
+}
+
+/* Call to Action Section */
+.cta {
+  text-align: center;
+  background-color: #ff6f61;
+  color: white;
+  padding: 50px 20px;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+/* Sign Out Button Styling */
+.signout-button {
+  padding: 10px 20px;
+  background-color: #006aff;
+  color: rgb(255, 5, 5);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-left: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.signout-button:hover {
+  background-color: #1153ec;
+}
+/* Sign Out Button Styling */
+.signout-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #1b54ff, #001eff);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for Sign Out Button */
+.signout-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Sign Out Icon Styling */
+.signout-button i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for icon */
+.signout-button:hover i {
+  transform: rotate(-20deg);
+}
+/* Container for the Sign In and Sign Out Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 20px;  /* Adjust spacing between buttons */
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Styling for both Sign In and Sign Out Buttons */
+.auth-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #1b54ff, #001eff);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for both buttons */
+.auth-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.auth-button i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for icon */
+.auth-button:hover i {
+  transform: rotate(-20deg);
+}
+
+/* Specific button styles (optional) */
+.sign-in-button {
+  background: linear-gradient(135deg, #1b54ff, #001eff);
+}
+
+.sign-out-button {
+  background: linear-gradient(135deg, #0011ff, #0000ff);
+}
+
+
+.cta button {
+  padding: 15px 30px;
+  background-color: #2575fc;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* Reset/Basic Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  color: black;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.dropdown-menu li a {
+  padding: 10px 15px;
+  display: block;
+  color: #000;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Show dropdown when .show is added */
+.dropdown-menu.show {
+  display: block;
+}
+
+.hero {
+  background-color: #f4f4f4;
+  padding: 2rem;
+  text-align: center;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.feature {
+  width: 30%;
+  text-align: center;
+}
+
+.testimonials {
+  background-color: #e8e8e8;
+  padding: 2rem;
+  text-align: center;
+}
+
+.cta {
+  background-color: #444;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.auth-button {
+  padding: 10px 20px;
+  background-color: #eee;
+  border: none;
+  cursor: pointer;
+}

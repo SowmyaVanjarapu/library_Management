@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Books | Library Management System</title>
+  <link rel="stylesheet" href="css/mybooks.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .total-books {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .books-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .books-table th, .books-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .books-table th {
+      background-color: #f4f4f4;
+    }
+
+    .cancel-btn {
+      padding: 5px 10px;
+      color: white;
+      background-color: red;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cancel-btn:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>LibraryHub</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="author.html">Authors</a></li>
+        <li><a href="borrow.html">Borrow</a></li>
+        <li><a href="mybooks.html" class="active">My Books</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="my-books-section">
+    <div class="search-container">
+      <h2>Search Your Books</h2>
+      <input type="text" id="username" class="form-input" placeholder="Enter your username" />
+      <button class="search-btn" id="search-btn">Search</button>
+      <div id="no-results"></div>
+    </div>
+
+    <div class="total-books" id="total-books"></div>
+
+    <div class="books-container">
+      <table class="books-table" id="books-table">
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Borrowed On</th>
+            <th>Return By</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="books-list"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 LibraryHub | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById('search-btn').addEventListener('click', function() {
+      const username = document.getElementById('username').value.trim();
+
+      if (username === '') {
+        alert('Please enter a username.');
+        return;
+      }
+
+      fetch(`http://localhost:3000/mybooks?username=${username}`)
+        .then(response => response.json())
+        .then(data => {
+          const totalBooksElement = document.getElementById('total-books');
+          const booksTable = document.getElementById('books-list');
+          const noResults = document.getElementById('no-results');
+
+          if (data.error) {
+            alert(data.error);
+            booksTable.innerHTML = '';
+            totalBooksElement.textContent = '';
+            noResults.textContent = data.error;
+          } else {
+            totalBooksElement.textContent = `${data.totalBooks} Books Taken`;
+            booksTable.innerHTML = '';
+
+           data.books.forEach(book => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${book.title || 'N/A'}</td>
+        <td>${book.borrowed_on || 'Unknown'}</td>
+        <td>${book.return_by || 'Unknown'}</td>
+        <td>
+            <button class="cancel-btn" data-borrow-id="${book.borrow_id || ''}">Cancel</button>
+        </td>
+    `;
+    booksTable.appendChild(row);
+});
+
+
+            document.querySelectorAll('.cancel-btn').forEach(button => {
+              button.addEventListener('click', function () {
+                const borrowId = this.getAttribute('data-borrow-id');
+                if (confirm('Are you sure you want to cancel this book?')) {
+                  fetch(`http://localhost:3000/mybooks/${borrowId}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                      alert(data.message);
+                      document.getElementById('search-btn').click();
+                    })
+                    .catch(error => alert('Failed to cancel: ' + error.message));
+                }
+              });
+            });
+          }
+        })
+        .catch(error => alert('An error occurred: ' + error.message));
+    });
+  </script>
+</body>
+</html>
